@@ -5,12 +5,6 @@
 FROM centos:centos7
 MAINTAINER Nicholas Moore
 
-ENV NAGIOS_HOME /opt/nagios
-ENV NAGIOS_CMDUSER nagios
-ENV NAGIOS_CMDGROUP nagios
-ENV NAGIOS_USER nagios
-ENV NAGIOS_GROUP nagios
-
 VOLUME /var/lib/plexmediaserver/
 VOLUME /media
 
