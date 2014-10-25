@@ -5,13 +5,21 @@
 FROM centos:centos7
 MAINTAINER Nicholas Moore
 
+ENV NAGIOS_HOME /opt/nagios
+ENV NAGIOS_CMDUSER nagios
+ENV NAGIOS_CMDGROUP nagios
+ENV NAGIOS_USER nagios
+ENV NAGIOS_GROUP nagios
+
 VOLUME /var/lib/plexmediaserver/
 VOLUME /media
 
-RUN rpm -Uvh http://mirrors.mit.edu/epel/7/x86_64/e/epel-release-7-2.noarch.rpm;\
-    rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm;\
-    yum -y install nagios nagios-plugins-all nagios-plugins-nrpe nrpe php httpd;\
+RUN cp /usr/share/zoneinfo/US/Pacific /etc/localtime;\
+    rpm -Uvh http://mirror.us.leaseweb.net/epel/7/x86_64/e/epel-release-7-2.noarch.rpm;\
+    yum -y install nginx nagios nagios-plugins-all php nagios-plugins-nrpe nrpe;\
+    yum clean all
 
-EXPOSE 80 443
+EXPOSE 80 5666
 
-ENTRYPOINT ["/start.sh"]
+#ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/bin/bash"]
